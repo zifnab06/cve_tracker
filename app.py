@@ -28,9 +28,9 @@ with open(configfile) as config_file:
   config = json.load(config_file)
 
 @app.route("/")
-def index():
-  k = request.args.get("k")
-  if not k == None:
+@app.route("/<string:k>")
+def index(kl=None):
+  if k:
     kernel = utils.getKernelByRepo(k)
     patches = utils.getPatchesByRepo(k)
     patched = utils.getNumberOfPatchedByRepoId(k)
